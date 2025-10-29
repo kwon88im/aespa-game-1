@@ -15,8 +15,8 @@ const allCardData = [
     { id: 12, name: 'Winter Drama2', image: 'images/winter-drama2.jpg', pair: 'winter2' },
     { id: 13, name: 'Giselle Drama1', image: 'images/giselle-drama1.jpg', pair: 'giselle2' },
     { id: 14, name: 'Giselle Drama2', image: 'images/giselle-drama2.jpg', pair: 'giselle2' },
-    { id: 15, name: 'Ning Drama1', image: 'images/ning-drama1.jpg', pair: 'ning2' },
-    { id: 16, name: 'Ning Drama2', image: 'images/ning-drama2.jpg', pair: 'ning2' },
+    { id: 15, name: 'Ning Drama1', image: 'images/ning-drama1.jpg', pair: 'ningning2' },
+    { id: 16, name: 'Ning Drama2', image: 'images/ning-drama2.jpg', pair: 'ningning2' },
     { id: 17, name: 'Karina DirtyWork1', image: 'images/karina-dw1.jpg', pair: 'karina3' },
     { id: 18, name: 'Karina DirtyWork2', image: 'images/karina-dw2.jpg', pair: 'karina3' },
     { id: 19, name: 'Winter DirtyWork1', image: 'images/winter-dw1.jpg', pair: 'winter3' },
@@ -47,9 +47,9 @@ let gameStarted = false;
 // Level configurations
 const levelConfig = {
     easy: { pairs: 4, gridClass: 'easy' },
-    medium: { pairs: 6, gridClass: 'medium' },
-    hard: { pairs: 8, gridClass: 'hard' },
-    expert: { pairs: 10, gridClass: 'expert' }
+    medium: { pairs: 8, gridClass: 'medium' },
+    hard: { pairs: 12, gridClass: 'hard' },
+    expert: { pairs: 16, gridClass: 'expert' }
 };
 
 // High Score Functions
@@ -304,5 +304,6 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
