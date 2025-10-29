@@ -8,13 +8,46 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎉 aespa 5th Anniversary Memory Game 🎉</h1>
-        <div class="stats">
-            <p>Moves: <span id="moves">0</span></p>
-            <p>Time: <span id="timer">0:00</span></p>
+        <h1>💙 aespa Memory Game 💜</h1>
+        
+        <!-- Level Selection Screen -->
+        <div id="level-selection" class="level-selection">
+            <h2>Choose Your Level</h2>
+            <div class="level-buttons">
+                <button class="level-btn" data-level="easy">
+                    <span class="level-title">Easy</span>
+                    <span class="level-desc">8 cards • 2x4 grid</span>
+                </button>
+                <button class="level-btn" data-level="medium">
+                    <span class="level-title">Medium</span>
+                    <span class="level-desc">12 cards • 3x4 grid</span>
+                </button>
+                <button class="level-btn" data-level="hard">
+                    <span class="level-title">Hard</span>
+                    <span class="level-desc">16 cards • 4x4 grid</span>
+                </button>
+                <button class="level-btn" data-level="expert">
+                    <span class="level-title">Expert</span>
+                    <span class="level-desc">20 cards • 4x5 grid</span>
+                </button>
+            </div>
+            <button id="clear-scores" class="clear-btn">Clear All High Scores</button>
         </div>
-        <div id="game-board" class="game-board"></div>
-        <button id="restart" class="restart-btn">Restart Game</button>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="game-screen" style="display: none;">
+            <div class="stats">
+                <p>Level: <span id="current-level">Easy</span></p>
+                <p>Moves: <span id="moves">0</span></p>
+                <p>Time: <span id="timer">0:00</span></p>
+                <p>Best: <span id="best-score">--</span></p>
+            </div>
+            <div id="game-board" class="game-board"></div>
+            <div class="game-buttons">
+                <button id="restart" class="game-btn">Restart</button>
+                <button id="back-to-menu" class="game-btn secondary">Back to Menu</button>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
