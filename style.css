@@ -142,4 +142,31 @@ aespa-memory-game/
     .game-board {
         gap: 10px;
     }
+
+.high-score {
+    display: block;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.clear-btn {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 12px 30px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+    
 }
