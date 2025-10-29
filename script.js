@@ -256,18 +256,20 @@ function checkMatch() {
     const pair2 = card2.dataset.pair;
     
     if (pair1 === pair2) {
-        // Match found!
-        card1.classList.add('matched');
-        card2.classList.add('matched');
-        flippedCards = [];
-        matchedPairs++;
-        
-        if (matchedPairs === levelConfig[currentLevel].pairs) {
-            setTimeout(() => {
-                clearInterval(timerInterval);
-                gameComplete();
-            }, 500);
-        }
+        // Match found! Wait a moment before marking as matched
+        setTimeout(() => {
+            card1.classList.add('matched');
+            card2.classList.add('matched');
+            flippedCards = [];
+            matchedPairs++;
+            
+            if (matchedPairs === levelConfig[currentLevel].pairs) {
+                setTimeout(() => {
+                    clearInterval(timerInterval);
+                    gameComplete();
+                }, 500);
+            }
+        }, 600);
     } else {
         // No match
         setTimeout(() => {
@@ -304,6 +306,7 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
 
