@@ -1,15 +1,41 @@
-// Card data - aespa members and their ae-avatars
-const cardData = [
-    { id: 1, name: 'Karina', image: 'images/karina.jpg', pair: 'karina' },
-    { id: 2, name: 'ae-Karina', image: 'images/ae-karina.jpg', pair: 'karina' },
-    { id: 3, name: 'Winter', image: 'images/winter.jpg', pair: 'winter' },
-    { id: 4, name: 'ae-Winter', image: 'images/ae-winter.jpg', pair: 'winter' },
-    { id: 5, name: 'Giselle', image: 'images/giselle.jpg', pair: 'giselle' },
-    { id: 6, name: 'ae-Giselle', image: 'images/ae-giselle.jpg', pair: 'giselle' },
-    { id: 7, name: 'Ningning', image: 'images/ningning.jpg', pair: 'ningning' },
-    { id: 8, name: 'ae-Ningning', image: 'images/ae-ningning.jpg', pair: 'ningning' }
+// Extended card data with more variety
+const allCardData = [
+    // Members
+    { id: 1, name: 'Karina Whiplash1', image: 'images/karina-whip1.jpg', pair: 'karina' },
+    { id: 2, name: 'Karina Whiplash2', image: 'images/karina-whip2.jpg', pair: 'karina' },
+    { id: 3, name: 'Winter Whiplash1', image: 'images/winter-whip1.jpg', pair: 'winter' },
+    { id: 4, name: 'Winter Whiplash2', image: 'images/winter-whip2.jpg', pair: 'winter' },
+    { id: 5, name: 'Giselle Whiplash1', image: 'images/giselle-whip1.jpg', pair: 'giselle' },
+    { id: 6, name: 'Giselle Whiplash2', image: 'images/giselle-whip2.jpg', pair: 'giselle' },
+    { id: 7, name: 'Ningning Whiplash1', image: 'images/ning-whip1.jpg', pair: 'ningning' },
+    { id: 8, name: 'Ningning Whiplash2', image: 'images/ning-whip2.jpg', pair: 'ningning' },
+    { id: 9, name: 'Karina Drama1', image: 'images/karina-drama1.jpg', pair: 'karina2' },
+    { id: 10, name: 'Karina Drama2', image: 'images/karina-drama2.jpg', pair: 'karina2' },
+    { id: 11, name: 'Winter Drama1', image: 'images/winter-drama1.jpg', pair: 'winter2' },
+    { id: 12, name: 'Winter Drama2', image: 'images/winter-drama2.jpg', pair: 'winter2' },
+    { id: 13, name: 'Giselle Drama1', image: 'images/giselle-drama1.jpg', pair: 'giselle2' },
+    { id: 14, name: 'Giselle Drama2', image: 'images/giselle-drama2.jpg', pair: 'giselle2' },
+    { id: 15, name: 'Ning Drama1', image: 'images/ning-drama1.jpg', pair: 'ning2' },
+    { id: 16, name: 'Ning Drama2', image: 'images/ning-drama2.jpg', pair: 'ning2' },
+    { id: 17, name: 'Karina DirtyWork1', image: 'images/karina-dw1.jpg', pair: 'karina3' },
+    { id: 18, name: 'Karina DirtyWork2', image: 'images/karina-dw2.jpg', pair: 'karina3' },
+    { id: 19, name: 'Winter DirtyWork1', image: 'images/winter-dw1.jpg', pair: 'winter3' },
+    { id: 20, name: 'Winter DirtyWork2', image: 'images/winter-dw2.jpg', pair: 'winter3' },
+    { id: 21, name: 'Giselle DirtyWork1', image: 'images/giselle-dw1.jpg', pair: 'giselle3' },
+    { id: 22, name: 'Giselle DirtyWork2', image: 'images/giselle-dw2.jpg', pair: 'giselle3' },
+    { id: 23, name: 'Ningning DirtyWork1', image: 'images/ning-dw1.jpg', pair: 'ningning3' },
+    { id: 24, name: 'Ningning DirtyWork2', image: 'images/ning-dw2.jpg', pair: 'ningning3' },
+    { id: 25, name: 'Karina RichMan1', image: 'images/karina-rm1.jpg', pair: 'karina4' },
+    { id: 26, name: 'Karina RichMan2', image: 'images/karina-rm2.jpg', pair: 'karina4' },
+    { id: 27, name: 'Winter RichMan1', image: 'images/winter-rm1.jpg', pair: 'winter4' },
+    { id: 28, name: 'Winter RichMan2', image: 'images/winter-rm2.jpg', pair: 'winter4' },
+    { id: 29, name: 'Giselle RichMan1', image: 'images/giselle-rm1.jpg', pair: 'giselle4' },
+    { id: 30, name: 'Giselle RichMan2', image: 'images/giselle-rm2.jpg', pair: 'giselle4' },
+    { id: 31, name: 'Ningning RichMan1', image: 'images/ning-rm1.jpg', pair: 'ningning4' },
+    { id: 32, name: 'Ningning RichMan2', image: 'images/ning-rm2.jpg', pair: 'ningning4' },
 ];
 
+let currentLevel = 'easy';
 let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
@@ -18,14 +44,137 @@ let timer = 0;
 let timerInterval = null;
 let gameStarted = false;
 
+// Level configurations
+const levelConfig = {
+    easy: { pairs: 4, gridClass: 'easy' },
+    medium: { pairs: 6, gridClass: 'medium' },
+    hard: { pairs: 8, gridClass: 'hard' },
+    expert: { pairs: 10, gridClass: 'expert' }
+};
+
+// High Score Functions
+function getHighScore(level) {
+    const scores = JSON.parse(localStorage.getItem('aespaMemoryScores')) || {};
+    return scores[level] || null;
+}
+
+function saveHighScore(level, moves, time) {
+    const scores = JSON.parse(localStorage.getItem('aespaMemoryScores')) || {};
+    const currentBest = scores[level];
+    
+    // Check if this is a new best score (fewer moves or same moves but faster time)
+    let isNewBest = false;
+    if (!currentBest) {
+        isNewBest = true;
+    } else if (moves < currentBest.moves) {
+        isNewBest = true;
+    } else if (moves === currentBest.moves && time < currentBest.time) {
+        isNewBest = true;
+    }
+    
+    if (isNewBest) {
+        scores[level] = { moves, time };
+        localStorage.setItem('aespaMemoryScores', JSON.stringify(scores));
+        return true;
+    }
+    return false;
+}
+
+function clearHighScores() {
+    if (confirm('Are you sure you want to clear all high scores?')) {
+        localStorage.removeItem('aespaMemoryScores');
+        updateHighScoreDisplay();
+        alert('All high scores cleared!');
+    }
+}
+
+function updateHighScoreDisplay() {
+    document.querySelectorAll('.level-btn').forEach(btn => {
+        const level = btn.dataset.level;
+        const highScore = getHighScore(level);
+        
+        let scoreDisplay = btn.querySelector('.high-score');
+        if (!scoreDisplay) {
+            scoreDisplay = document.createElement('span');
+            scoreDisplay.className = 'high-score';
+            btn.appendChild(scoreDisplay);
+        }
+        
+        if (highScore) {
+            scoreDisplay.textContent = `🏆 Best: ${highScore.moves} moves • ${formatTime(highScore.time)}`;
+        } else {
+            scoreDisplay.textContent = 'No record yet';
+        }
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    showLevelSelection();
+    
+    // Level selection buttons
+    document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const level = e.currentTarget.dataset.level;
+            startGame(level);
+        });
+    });
+    
+    // Game buttons
+    document.getElementById('restart').addEventListener('click', () => startGame(currentLevel));
+    document.getElementById('back-to-menu').addEventListener('click', showLevelSelection);
+    
+    // Clear scores button (if exists)
+    const clearBtn = document.getElementById('clear-scores');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', clearHighScores);
+    }
+});
+
+// Show level selection screen
+function showLevelSelection() {
+    document.getElementById('level-selection').style.display = 'block';
+    document.getElementById('game-screen').style.display = 'none';
+    updateHighScoreDisplay();
+    
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+}
+
+// Start game with selected level
+function startGame(level) {
+    currentLevel = level;
+    document.getElementById('level-selection').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'block';
+    
+    const levelName = level.charAt(0).toUpperCase() + level.slice(1);
+    document.getElementById('current-level').textContent = levelName;
+    
+    // Display current high score for this level
+    const highScore = getHighScore(level);
+    let bestScoreText = 'No record';
+    if (highScore) {
+        bestScoreText = `🏆 ${highScore.moves} moves • ${formatTime(highScore.time)}`;
+    }
+    document.getElementById('best-score').textContent = bestScoreText;
+    
+    initGame();
+}
+
 // Initialize game
 function initGame() {
     const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';
     
-    // Reset variables
-    cards = [...cardData];
+    // Get number of pairs for current level
+    const pairsNeeded = levelConfig[currentLevel].pairs;
+    
+    // Select cards for this level
+    cards = allCardData.slice(0, pairsNeeded * 2);
     shuffleCards();
+    
+    // Reset variables
     flippedCards = [];
     matchedPairs = 0;
     moves = 0;
@@ -39,6 +188,9 @@ function initGame() {
         clearInterval(timerInterval);
     }
     
+    // Set grid class
+    gameBoard.className = 'game-board ' + levelConfig[currentLevel].gridClass;
+    
     // Create card elements
     cards.forEach((card, index) => {
         const cardElement = document.createElement('div');
@@ -46,12 +198,12 @@ function initGame() {
         cardElement.dataset.id = index;
         cardElement.dataset.pair = card.pair;
         
-cardElement.innerHTML = `
-    <div class="card-front">?</div>
-    <div class="card-back">
-        <img src="${card.image}" alt="${card.name}">
-    </div>
-`;
+        cardElement.innerHTML = `
+            <div class="card-front">?</div>
+            <div class="card-back">
+                <img src="${card.image}" alt="${card.name}">
+            </div>
+        `;
         
         cardElement.addEventListener('click', flipCard);
         gameBoard.appendChild(cardElement);
@@ -110,10 +262,10 @@ function checkMatch() {
         flippedCards = [];
         matchedPairs++;
         
-        if (matchedPairs === cardData.length / 2) {
+        if (matchedPairs === levelConfig[currentLevel].pairs) {
             setTimeout(() => {
                 clearInterval(timerInterval);
-                alert(`🎉 Congratulations! You completed the game in ${moves} moves and ${formatTime(timer)}!`);
+                gameComplete();
             }, 500);
         }
     } else {
@@ -126,6 +278,26 @@ function checkMatch() {
     }
 }
 
+// Game complete
+function gameComplete() {
+    const levelName = currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1);
+    const isNewBest = saveHighScore(currentLevel, moves, timer);
+    
+    let message = `🎉 Congratulations!\n\n`;
+    message += `Level: ${levelName}\n`;
+    message += `Moves: ${moves}\n`;
+    message += `Time: ${formatTime(timer)}\n\n`;
+    
+    if (isNewBest) {
+        message += `🏆 NEW PERSONAL BEST! 🏆`;
+    } else {
+        const highScore = getHighScore(currentLevel);
+        message += `Your best: ${highScore.moves} moves • ${formatTime(highScore.time)}`;
+    }
+    
+    alert(message);
+}
+
 // Format time
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
@@ -133,8 +305,4 @@ function formatTime(seconds) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
-// Restart button
-document.getElementById('restart').addEventListener('click', initGame);
 
-// Start game on load
-initGame();
