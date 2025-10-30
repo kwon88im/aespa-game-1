@@ -28,6 +28,14 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
+.game-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
 /* Level Selection */
 .level-selection {
     background: rgba(255, 255, 255, 0.1);
@@ -378,6 +386,11 @@ h1 {
     h1 {
         font-size: 1.3em;
     }
+
+    .game-subtitle {
+        font-size: 0.95em;
+        margin-bottom: 20px;
+    }
     
     .level-selection {
         padding: 25px 15px;
@@ -414,4 +427,5 @@ h1 {
         font-size: 0.8em;
         padding: 12px 15px;
     }
-}
+ }
+
