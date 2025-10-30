@@ -1,3 +1,16 @@
+// Welcome Modal
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('welcome-modal');
+    const startBtn = document.getElementById('start-btn');
+    
+    // Show modal on load
+    modal.style.display = 'flex';
+    
+    // Close modal when button clicked
+    startBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
 // Extended card data with more variety
 const allCardData = [
     // Members
@@ -306,6 +319,7 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
 
