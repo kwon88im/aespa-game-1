@@ -209,7 +209,7 @@ function initGame() {
         cardElement.dataset.pair = card.pair;
         
         cardElement.innerHTML = `
-            <div class="card-front">?</div>
+            <div class="card-front">æ</div>
             <div class="card-back">
                 <img src="${card.image}" alt="${card.name}">
             </div>
@@ -316,4 +316,5 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
