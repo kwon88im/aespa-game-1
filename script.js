@@ -33,6 +33,14 @@ const allCardData = [
     { id: 30, name: 'Giselle RichMan2', image: 'images/giselle-rm2.jpg', pair: 'giselle4' },
     { id: 31, name: 'Ningning RichMan1', image: 'images/ning-rm1.jpg', pair: 'ningning4' },
     { id: 32, name: 'Ningning RichMan2', image: 'images/ning-rm2.jpg', pair: 'ningning4' },
+    { id: 33, name: 'Karina Yellow1', image: 'images/karina-yellow1.jpg', pair: 'karina5' },
+    { id: 34, name: 'Karina Yellow2', image: 'images/karina-yellow2.jpg', pair: 'karina5' },
+    { id: 35, name: 'Winter Yellow1', image: 'images/winter-yellow1.jpg', pair: 'winter5' },
+    { id: 36, name: 'Winter Yellow2', image: 'images/winter-yellow2.jpg', pair: 'winter5' },
+    { id: 37, name: 'Giselle Yellow1', image: 'images/giselle-yellow1.jpg', pair: 'giselle5' },
+    { id: 38, name: 'Giselle Yellow2', image: 'images/giselle-yellow2.jpg', pair: 'giselle5' },
+    { id: 39, name: 'Ningning Yellow1', image: 'images/ning-yellow1.jpg', pair: 'ningning5' },
+    { id: 40, name: 'Ningning Yellow2', image: 'images/ning-yellow2.jpg', pair: 'ningning5' },
 ];
 
 let currentLevel = 'easy';
@@ -49,7 +57,7 @@ const levelConfig = {
     easy: { pairs: 4, gridClass: 'easy' },
     medium: { pairs: 8, gridClass: 'medium' },
     hard: { pairs: 12, gridClass: 'hard' },
-    expert: { pairs: 16, gridClass: 'expert' }
+    expert: { pairs: 20, gridClass: 'expert' }
 };
 
 // High Score Functions
@@ -316,5 +324,6 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
