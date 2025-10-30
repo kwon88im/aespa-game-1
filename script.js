@@ -123,6 +123,16 @@ function updateHighScoreDisplay() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Welcome Modal
+    const modal = document.getElementById('welcome-modal');
+    const startBtn = document.getElementById('start-btn');
+    
+    // Close modal when button clicked
+    startBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+    
+    // Show level selection
     showLevelSelection();
     
     // Level selection buttons
@@ -137,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('restart').addEventListener('click', () => startGame(currentLevel));
     document.getElementById('back-to-menu').addEventListener('click', showLevelSelection);
     
-    // Clear scores button (if exists)
+    // Clear scores button
     const clearBtn = document.getElementById('clear-scores');
     if (clearBtn) {
         clearBtn.addEventListener('click', clearHighScores);
@@ -319,8 +329,3 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
-
-
-
-
-
