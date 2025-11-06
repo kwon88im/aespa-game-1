@@ -50,14 +50,31 @@ const sounds = {
     win: new Audio('sounds/win.mp3')
 };
 
+// Set volume for all sounds
+Object.values(sounds).forEach(sound => {
+    sound.volume = 0.5;
+});
+
 // Sound enabled state
 let soundEnabled = true;
 
 // Function to play sound
 function playSound(soundName) {
-    if (soundEnabled && sounds[soundName]) {
-        sounds[soundName].currentTime = 0; // Reset to start
-        sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+    if (!soundEnabled) return; // Exit immediately if muted
+    
+    const sound = sounds[soundName];
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log('Sound play failed:', e));
+    }
+}
+
+// Function to toggle sound
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const soundToggle = document.getElementById('sound-toggle');
+    if (soundToggle) {
+        soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
     }
 }
 
@@ -148,10 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sound toggle button
     const soundToggle = document.getElementById('sound-toggle');
     if (soundToggle) {
-        soundToggle.addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
-        });
+        soundToggle.addEventListener('click', toggleSound);
     }
     
     // Show level selection
