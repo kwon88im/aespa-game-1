@@ -50,9 +50,12 @@ const sounds = {
     win: new Audio('sounds/win.mp3')
 };
 
+// Sound enabled state
+let soundEnabled = true;
+
 // Function to play sound
 function playSound(soundName) {
-    if (sounds[soundName]) {
+    if (soundEnabled && sounds[soundName]) {
         sounds[soundName].currentTime = 0; // Reset to start
         sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
     }
@@ -142,21 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
     });
 
-let soundEnabled = true;
-
-// Add in DOMContentLoaded
-document.getElementById('sound-toggle').addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
-});
-
-// Update playSound function
-function playSound(soundName) {
-    if (soundEnabled && sounds[soundName]) {
-        sounds[soundName].currentTime = 0;
-        sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+    // Sound toggle button
+    const soundToggle = document.getElementById('sound-toggle');
+    if (soundToggle) {
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+        });
     }
-}
     
     // Show level selection
     showLevelSelection();
@@ -308,11 +304,10 @@ function checkMatch() {
     const pair2 = card2.dataset.pair;
     
     if (pair1 === pair2) {
-
         // Match found! Play match sound
         playSound('match');
         
-        // Match found! Wait a moment before marking as matched
+        // Wait a moment before marking as matched
         setTimeout(() => {
             card1.classList.add('matched');
             card2.classList.add('matched');
@@ -365,8 +360,3 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
-
-
-
-
-
