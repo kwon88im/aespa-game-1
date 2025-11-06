@@ -141,6 +141,22 @@ document.addEventListener('DOMContentLoaded', () => {
     startBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
+
+let soundEnabled = true;
+
+// Add in DOMContentLoaded
+document.getElementById('sound-toggle').addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
+});
+
+// Update playSound function
+function playSound(soundName) {
+    if (soundEnabled && sounds[soundName]) {
+        sounds[soundName].currentTime = 0;
+        sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+    }
+}
     
     // Show level selection
     showLevelSelection();
@@ -349,6 +365,7 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
 
