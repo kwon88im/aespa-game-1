@@ -43,6 +43,21 @@ const allCardData = [
     { id: 40, name: 'Ningning Yellow2', image: 'images/ning-yellow2.jpg', pair: 'ningning5' },
 ];
 
+// Sound effects
+const sounds = {
+    flip: new Audio('sounds/flip.mp3'),
+    match: new Audio('sounds/match.mp3'),
+    win: new Audio('sounds/win.mp3')
+};
+
+// Function to play sound
+function playSound(soundName) {
+    if (sounds[soundName]) {
+        sounds[soundName].currentTime = 0; // Reset to start
+        sounds[soundName].play().catch(e => console.log('Sound play failed:', e));
+    }
+}
+
 let currentLevel = 'easy';
 let cards = [];
 let flippedCards = [];
@@ -259,6 +274,9 @@ function flipCard() {
     
     this.classList.add('flipped');
     flippedCards.push(this);
+
+    // Play flip sound
+    playSound('flip');
     
     if (flippedCards.length === 2) {
         moves++;
@@ -274,6 +292,10 @@ function checkMatch() {
     const pair2 = card2.dataset.pair;
     
     if (pair1 === pair2) {
+
+        // Match found! Play match sound
+        playSound('match');
+        
         // Match found! Wait a moment before marking as matched
         setTimeout(() => {
             card1.classList.add('matched');
@@ -302,6 +324,9 @@ function checkMatch() {
 function gameComplete() {
     const levelName = currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1);
     const isNewBest = saveHighScore(currentLevel, moves, timer);
+
+    // Play win sound
+    playSound('win');
     
     let message = `🎉 Congratulations!\n\n`;
     message += `Level: ${levelName}\n`;
@@ -324,6 +349,7 @@ function formatTime(seconds) {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 
 
